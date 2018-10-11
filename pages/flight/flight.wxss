@@ -1,0 +1,53 @@
+.item-box{
+  margin: 130rpx auto 0;
+}
+.item{
+    border-bottom: 2rpx solid #EEEEEE;
+}
+.item:last-child{
+  border:0;
+}
+.left,.middle{
+    float: left;
+}
+.right{
+    float: right;
+}
+
+.listTop{
+    padding-top: 26rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+.listTop .left,.listTop .middle,.listTop .right{
+    float: left;
+    width: 31%;
+}
+.listTop .left{
+    margin-left: 3.5%;
+}
+.listTop .middle{
+    text-align: center;
+}
+.listTop .right{
+    margin-right: 3.5%;
+    text-align: right;
+}
+.listTop .right .sub{
+    float: right;
+    font-size: 24rpx;
+    line-height: 30rpx;
+    margin-left: 2rpx;
+}
+
+.listButtom{
+    clear: both;
+    height:50rpx;
+    font-size: 28rpx;
+}
+.listButtom .left{
+    margin-left: 3.5%;
+}
+.listButtom .right{
+    margin-right: 3.5%;
+}

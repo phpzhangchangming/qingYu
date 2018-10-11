@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "飞行列表",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar"
+  }
+}

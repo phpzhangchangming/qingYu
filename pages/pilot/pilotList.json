@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "飞手列表",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar"
+  }
+}

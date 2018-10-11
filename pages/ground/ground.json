@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "地块列表",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar"
+  }
+}

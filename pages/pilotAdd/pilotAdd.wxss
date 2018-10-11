@@ -1,0 +1,29 @@
+page{
+    height:90%;
+    background: #EEEEEE;
+}
+.item-box{
+    padding:10% 0 0;
+    margin:130rpx auto 0;
+}
+
+.item-box .phone,.item-box .name{
+    background:#fff;
+    height:80rpx;
+    padding:40rpx 30rpx 0;
+}
+.item-box .phone view,.item-box .name view{
+    float:left;
+    margin-right:40rpx;
+    font-weight:500;
+}
+.item-box .phone {
+    border-top:4rpx solid #F5F5F5
+}
+
+.item-box .but button {
+    margin-top: 50rpx;
+    width: 86%;
+    background: #13A8A0;
+    padding:10rpx;
+}

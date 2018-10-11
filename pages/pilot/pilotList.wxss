@@ -1,0 +1,79 @@
+/* pages/pilot/pilotList.wxss*/
+/*.text-box{
+    z-index: 50;
+    width:20px;
+    height:20px;
+    background:#ccc;
+    position:absolute;
+
+}*/
+
+view {
+    box-sizing: border-box;
+}
+
+.item-box {
+    width: 100%;
+    margin: 130rpx auto 0;
+    padding:0;
+}
+
+.items {
+    width:100%;
+}
+
+.item {
+    position:relative;
+    border-bottom:2rpx solid #BEBEBE;
+    height: 120rpx;
+    line-height: 120rpx;
+    overflow: hidden;
+}
+
+.item:last-child {
+    border:0;
+}
+
+.inner {
+    position: absolute;
+    top: 0;
+}
+
+.inner.txt {
+    background-color:#fff;
+    width: 100%;
+    z-index: 5;
+    padding: 0 30rpx;
+    transition: left 0.2s ease-in-out;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.inner.edit,.inner.del,.inner.delConfirm {
+    text-align: center;
+    z-index: 4;
+    right: 0;
+    color: #fff;
+    font-size: 30rpx;
+}
+.inner.edit {
+    background-color: #66666E;
+    width: 180rpx;
+    margin-right: 160rpx;
+}
+.inner.del {
+    background-color: #ff0000;
+    width: 160rpx;
+}
+.inner.delConfirm{
+    background-color: #ff0000;
+    width: 340rpx;
+}
+
+.inner .float-l{
+    float: left;
+}
+.inner .float-r{
+    float: right;
+}

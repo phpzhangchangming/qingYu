@@ -1,0 +1,73 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wxdc4a9ab4c9365676",
+	"projectname": "uav",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "添加飞手",
+					"pathName": "pages/pilotAdd/pilotAdd",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "飞手",
+					"pathName": "pages/pilot/pilotList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "地块",
+					"pathName": "pages/ground/ground",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "飞行",
+					"pathName": "pages/flight/flight",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/user/user"
+				}
+			]
+		}
+	}
+}

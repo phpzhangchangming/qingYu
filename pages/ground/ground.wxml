@@ -1,0 +1,27 @@
+<navbar
+        titleMsg="地块列表"
+        bind:_callBack="addPilot"
+        show="false"
+>
+</navbar>
+<view class="item-box">
+    <view class="items">
+        <view wx:for="{{list}}" wx:key="{{index}}" class="item">
+            <view
+                    bind:touchstart="touchS"
+                    bind:touchmove="touchM"
+                    bind:touchend="touchE"
+                    data-index="{{index}}"
+                    style="{{item.txtStyle}}"
+                    class="inner txt"
+            >
+                <view class="float-l" data-index="{{index}}">{{item.name}}</view>
+                <view class="float-r" data-index="{{index}}">{{item.crop}}</view>
+                <view class='float-m'>{{item.area}} 亩</view>
+            </view>
+            <view data-index="{{index}}">
+                <view bind:tap="editItem" data-index="{{index}}" class="inner edit">进行修改</view>
+            </view>
+        </view>
+    </view>
+</view>

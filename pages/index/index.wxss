@@ -1,0 +1,21 @@
+.login{
+  position:absolute;
+  top:40%;
+  width:80%;
+  margin-left:10%;
+}
+.login text{
+  font-size: 30rpx;
+  color: #4D4D4D;
+  text-align: center;
+  display: block;
+  margin-bottom: 30rpx;
+}
+.bottom{
+  border-radius: 50rpx;
+  border: 0;
+}
+.else{
+  text-align: center;
+  margin-top:45%;
+}

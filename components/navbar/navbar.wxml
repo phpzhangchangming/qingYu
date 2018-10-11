@@ -1,0 +1,13 @@
+<view class='nav bg-white' style='height:{{navH}}px'>
+  <view class='nav-title'>
+    {{titleMsg}}
+    <view wx:if="{{show === 'show'}}">
+      <navigator wx:if="{{showNavigator === 'add'}}" url="{{url}}" hover-class="navigator-hover">
+        <image src='../../images/add.png' mode='aspectFit' class='back'></image>
+      </navigator>
+      <navigator wx:else open-type="navigateBack" hover-class="navigator-hover">
+        <image src='../../images/back.png' mode='aspectFit' class='back'></image>
+      </navigator>
+    </view>
+  </view>
+</view>

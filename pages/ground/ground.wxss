@@ -1,0 +1,70 @@
+view {
+    box-sizing: border-box;
+}
+
+.item-box {
+    width: 100%;
+    margin: 130rpx auto 0;
+    padding:0;
+}
+
+.items {
+    width:100%;
+}
+
+.item {
+    position:relative;
+    border-bottom:2rpx solid #BEBEBE;
+    height: 140rpx;
+    line-height: 100rpx;
+    overflow: hidden;
+}
+
+.item:last-child {
+    border:0;
+}
+
+.inner {
+    position: absolute;
+    top: 0;
+}
+
+.inner.txt {
+    background-color:#fff;
+    width: 100%;
+    z-index: 5;
+    padding: 0 30rpx;
+    transition: left 0.2s ease-in-out;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.inner.edit {
+    text-align: center;
+    z-index: 4;
+    right: 0;
+    color: #fff;
+    font-size: 30rpx;
+    background-color: #66666E;
+    width: 180rpx;
+}
+
+.inner .float-l{
+    width:500rpx;
+    float: left;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.inner .float-r{
+    float: right;
+}
+.inner .float-m{
+    height: 40rpx;
+    clear: both;
+    position:relative;
+    top:-16rpx;
+    line-height: 1;
+    font-size: 30rpx;
+}

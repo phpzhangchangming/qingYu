@@ -1,0 +1,17 @@
+<navbar
+        titleMsg="授权"
+        bind:_callBack="addPilot"
+        show='false'
+>
+</navbar>
+
+<map
+        wx:if="{{showMap}}"
+        id="myMap"
+        style="width: 100%; height: {{mapHeight}}px;"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        scale="{{scale}}"
+        markers="{{markers}}"
+        show-location
+></map>

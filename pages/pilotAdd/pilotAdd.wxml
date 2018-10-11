@@ -1,0 +1,24 @@
+<navbar
+        titleMsg="添加飞手"
+        bind:_callBack="addPilot"
+        showNavigator="rollback"
+>
+</navbar>
+<view class="item-box">
+    <form bindsubmit="formSubmit">
+        <view class="name">
+            <view>飞手姓名</view>
+            <input placeholder-style="color:#C8C8C8" placeholder="录入姓名" name="name" auto-focus />
+        </view>
+        <view class="phone">
+            <view>联系电话</view>
+            <input placeholder-style="color:#C8C8C8" placeholder="录入联系电话" type="number"  name="phone"/>
+        </view>
+        <view class="but">
+            <button
+                    form-type="submit"
+                    type="primary"
+            > {{butText}} </button>
+        </view>
+    </form>
+</view>
