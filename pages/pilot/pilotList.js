@@ -6,8 +6,11 @@ Page({
         hidden: true,
         list: [],
     },
-
     onLoad: function (options) {
+        wx.showLoading({
+            title: '加载中...',
+            mask: true
+        });
         // 页面初始化 options为页面跳转所带来的参数
         this.initEleWidth();
         this.getData();
@@ -38,7 +41,6 @@ Page({
     },
     addPilot: function () {
         console.log('addPilot');
-
     },
     touchM: function (e) {
         if (e.touches.length == 1) {
@@ -129,26 +131,46 @@ Page({
     delItemVerify: function () {//删除确认。
         this.setData({hidden: false});
     },
-    //ming调用接口
     delItemConfirm: function (e) {//删除
-        let _this = this;
-        wx.showToast({
-            title: '已删除',
-            icon: 'success',
-            duration: 1000,
-            complete: function () {
-                setTimeout(function () {
-                    //获取列表中要删除项的下标
-                    var index = e.target.dataset.index;
-                    var list = _this.data.list;
-                    //移除列表中下标为index的项
-                    list.splice(index, 1);
-                    //更新列表的状态
-                    _this.setData({
-                        list: list
+        let taht = this;
+        let pilotId = '';
+
+        wx.request({
+            url: getApp().globalData.url + '/user/deletePilot',
+            data: {
+                userId:1,
+                pilotId:1
+            },
+            success: function(res) {    //从数据库获取用户信息
+
+                if(res.data.result == 0){
+                    wx.showModal({
+                        title: '通知',
+                        content: '删除失败',
+                        showCancel: false,
+                        confirmText: '确定',
+                    })
+                }else{
+                    wx.showToast({
+                        title: '已删除',
+                        icon: 'success',
+                        duration: 1000,
+                        complete: function () {
+                            setTimeout(function () {
+                                //获取列表中要删除项的下标
+                                var index = e.target.dataset.index;
+                                var list = taht.data.list;
+                                //移除列表中下标为index的项
+                                list.splice(index, 1);
+                                //更新列表的状态
+                                taht.setData({
+                                    list: list
+                                });
+                                taht.setData({hidden: true});
+                            }, 1000);
+                        }
                     });
-                    _this.setData({hidden: true});
-                }, 1000);
+                }
             }
         });
     },
@@ -162,7 +184,8 @@ Page({
             },
             header: {'content-type': 'application/json'},
             success: function (res) {                    //从数据库获取用户信息
-                console.log(res);
+                wx.hideLoading();
+
                 if(res.data.result != 1){
                     wx.showModal({
                         title: '通知',
@@ -174,9 +197,6 @@ Page({
                 }else{
                     that.setData({ list: res.data.data });
                 }
-
-                // that.queryUsreInfo();
-                // that.setData({showMap: true})
             }
         });
     }

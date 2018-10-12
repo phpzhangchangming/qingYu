@@ -22,7 +22,7 @@
             </view>
             <view data-index="{{index}}">
                 <!--<view catchtap="editItem" data-index="{{index}}" data-id="{{item.id}}" class="inner edit">进行修改</view>-->
-                <navigator url="/pages/pilotAdd/pilotAdd?id={{item.id}}&type=change" hover-class="navigator-hover">
+                <navigator url="/pages/pilotAdd/pilotAdd?id={{item.id}}&type=change&name={{item.name}}&&phone={{item.phone}}" hover-class="navigator-hover">
                     <view data-index="{{index}}" data-id="{{item.id}}" class="inner edit">进行修改</view>
                 </navigator>
                 <view catchtap="delItemVerify" data-index="{{index}}" class="inner del">删除</view>
