@@ -1,8 +1,12 @@
+const App = getApp();
 Page({
     data: { //判断小程序的API，回调，参数，组件等是否在当前版本可用。
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         login: true,
-        show: true
+        show: true,
+        phone:'',
+        time:60,
+        showTime:false
     },
     onLoad: function() {
         var that = this; // 查看是否授权
@@ -25,28 +29,83 @@ Page({
             }
         })
     },
-    phoneLogin: function() {
+    phoneData:function(e){
+        this.setData({phone:e.detail.value})
+    },
+    getVerifyCode:function(){
+        this.countDown();
+
+        this.setData({showTime:true});
+
+        // let phone = this.data.phone;
+        // let that = this;
+        // wx.request({
+        //     url: getApp().globalData.url + '/user/getVerifyCode',
+        //     data: {
+        //         phone:phone
+        //     },
+        //     header: {
+        //         'content-type': 'application/json'
+        //     },
+        //     success: function(res) { //从数据库获取用户信息
+        //         if(res.data.result == 0){
+        //             wx.showModal({
+        //                 title: '通知',
+        //                 content: '登录失败，请核实信息',
+        //                 showCancel: false,
+        //                 confirmText: '确定',
+        //             })
+        //         }else{
+        //             that.setTime();
+        //         }
+        //     }
+        // })
+    },
+    countDown:function(){
+        if(this.data.time == 0){
+            this.setData({
+                time:60,
+                showTime:false
+            })
+        }else{
+            let that = this;
+            setTimeout(function(){
+                that.setData({time:that.data.time - 1})
+                that.countDown();
+            },1000);
+        }
+    },
+    phoneLogin: function(e) {
         var that = this; //插入登录的用户的相关信息到数据库
+        let phone = e.detail.value.phone;
+        let verifyCode = e.detail.value.verifyCode;
+
         wx.request({
-            url: getApp().globalData.urlPath + 'hstc_interface/insert_user',
+            url: getApp().globalData.url + 'user/login',
             data: {
-                openid: getApp().globalData.openid,
-                nickName: e.detail.userInfo.nickName,
-                avatarUrl: e.detail.userInfo.avatarUrl,
-                province: e.detail.userInfo.province,
-                city: e.detail.userInfo.city
+                phone:phone,
+                verifyCode:verifyCode
             },
             header: {
                 'content-type': 'application/json'
             },
             success: function(res) { //从数据库获取用户信息
-                that.queryUsreInfo();
-                console.log("插入小程序登录用户信息成功！");
+                if(res.data.result == 0){
+                    wx.showModal({
+                        title: '通知',
+                        content: '登录失败，请核实信息',
+                        showCancel: false,
+                        confirmText: '确定',
+                    })
+                }else{
+                    let token = res.data.data.token;
+                    App.globalData.userInfo['token'] = token;
+                    console.log(App.globalData);
+                    wx.switchTab({
+                        url: '/pages/index/index'
+                    })
+                }
             }
-        }); //授权成功后，跳转进入小程序首页
-
-        wx.switchTab({
-            url: '/pages/index/index'
         })
     },
     bindGetUserInfo: function(e) {

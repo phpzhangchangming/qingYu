@@ -53,3 +53,12 @@ input{
     margin-top:30rpx;
     color: #fff;
 }
+.time{
+    float: right;
+    color: #808080;
+    font-size: 30rpx;
+}
+.time view{
+    width:166rpx;
+    text-align: center;
+}

@@ -13,21 +13,28 @@
             <view>申请获取以下权限</view>
             <text>获得你的公开信息(昵称，头像等)</text>
         </view>
-        <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo"> 授权登录 </button>
+        <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+            授权登录
+        </button>
     </view>
     <view wx:else>请升级微信版本</view>
 </view>
 <view wx:else>
     <view class='login'>
-        <view class='phone'>
-            <text>手机号</text>
-            <input maxlength="11" placeholder="手机号" type="digit" auto-focus/>
-        </view>
-        <view class='verify'>
-            <text>验证码</text>
-            <button>获取动态码</button>
-            <input maxlength="6" placeholder="验证码" />
-        </view>
-        <button class='sub' bindtap="phoneLogin">登 录</button>
+        <form bindsubmit="phoneLogin">
+            <view class='phone'>
+                <text>手机号</text>
+                <input name="phone" maxlength="11" placeholder="手机号" bindinput="phoneData" type="number" auto-focus/>
+            </view>
+            <view class='verify'>
+                <text>验证码</text>
+                <view class="time">
+                    <button hidden="{{showTime}}" bindtap="getVerifyCode">获取动态码</button>
+                    <view hidden="{{!showTime}}">{{time}}</view>
+                </view>
+                <input name="verifyCode" maxlength="6" placeholder="验证码" type="number"/>
+            </view>
+            <button class='sub' form-type="submit">登 录</button>
+        </form>
     </view>
 </view>
