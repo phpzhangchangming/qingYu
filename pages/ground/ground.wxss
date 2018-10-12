@@ -38,6 +38,7 @@ view {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 38rpx;
 }
 
 
@@ -49,6 +50,8 @@ view {
     font-size: 30rpx;
     background-color: #66666E;
     width: 180rpx;
+    height:140rpx;
+    line-height:140rpx;
 }
 
 .inner .float-l{

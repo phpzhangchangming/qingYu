@@ -81,7 +81,7 @@ Page({
         let verifyCode = e.detail.value.verifyCode;
 
         wx.request({
-            url: getApp().globalData.url + 'user/login',
+            url: getApp().globalData.url + '/user/login',
             data: {
                 phone:phone,
                 verifyCode:verifyCode
@@ -100,7 +100,6 @@ Page({
                 }else{
                     let token = res.data.data.token;
                     App.globalData.userInfo['token'] = token;
-                    console.log(App.globalData);
                     wx.switchTab({
                         url: '/pages/index/index'
                     })

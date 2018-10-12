@@ -1,5 +1,5 @@
 <navbar
-        titleMsg="授权"
+        titleMsg="飞机位置"
         bind:_callBack="addPilot"
         show='false'
 >
@@ -8,7 +8,7 @@
 <map
         wx:if="{{showMap}}"
         id="myMap"
-        style="width: 100%; height: {{mapHeight}}px;"
+        style="width: 100%; height: {{mapHeight}}px;margin-top:{{navHeight}}px;"
         latitude="{{latitude}}"
         longitude="{{longitude}}"
         scale="{{scale}}"

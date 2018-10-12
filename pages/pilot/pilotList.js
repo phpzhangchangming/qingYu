@@ -15,22 +15,6 @@ Page({
         this.initEleWidth();
         this.getData();
     },
-
-    onReady: function () {
-        // 页面渲染完成
-    },
-
-    onShow: function () {
-        // 页面显示
-    },
-
-    onHide: function () {
-        // 页面隐藏
-    },
-
-    onUnload: function () {
-        // 页面关闭
-    },
     touchS: function (e) {
         if (e.touches.length == 1) {
             this.setData({

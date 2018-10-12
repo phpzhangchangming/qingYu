@@ -2,6 +2,7 @@
 .item-box{
     background:#fff;
     margin:130rpx auto 0;
+    font-size:38rpx;
 }
 .item{
     height: 120rpx;
