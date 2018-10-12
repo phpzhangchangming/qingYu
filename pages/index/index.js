@@ -5,7 +5,7 @@ Page({
         longitude: 0,
         scale: '10', //缩放级别
         markers: [],
-        mapHeight: App.globalData.height - App.globalData.navHeight - 46,
+        mapHeight: App.globalData.height - App.globalData.navHeight,
         navHeight: App.globalData.navHeight,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         showMap:false

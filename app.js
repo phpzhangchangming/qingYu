@@ -15,9 +15,9 @@ App({
         });
 
         // 展示本地存储能力
-        var logs = wx.getStorageSync('logs') || []
-        logs.unshift(Date.now())
-        wx.setStorageSync('logs', logs)
+        // var logs = wx.getStorageSync('logs') || [];
+        // logs.unshift(Date.now());
+        // wx.setStorageSync('logs', logs);
         
         wx.getSystemInfo({
             success: res => {
@@ -51,13 +51,14 @@ App({
         // })
     },
     globalData: {
-        userInfo: null,
+        userInfo: [],
         apiPrefix: "http://localhost:8080/api",
         height: 0,
         share: false,
         openid: 0,
         wx_url_1: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxdc4a9ab4c9365676&secret=4f520844fbbc3d132a80fa5ea4ffe79b&js_code=',
         wx_url_2: '&grant_type=authorization_code',
-        url:  'http://test.api.tsingyutech.com:8088/uav/api'
+        url: 'http://test.api.tsingyutech.com:8088/uav/api',
+        verifyCode:''
     }
-})
+});
