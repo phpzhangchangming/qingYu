@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "修改地块",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar"
+  }
+}

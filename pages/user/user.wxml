@@ -24,7 +24,7 @@
     </view>
     <view class="item">
         <view class="left">消费记录</view>
-        <view class='right'>查看</view>
+        <view class='right' bindtap='checkList'>查看</view>
     </view>
     <view class="item">
         <view class="left">版本</view>

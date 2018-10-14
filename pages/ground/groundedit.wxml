@@ -1,0 +1,27 @@
+<navbar
+        titleMsg="修改地块"
+        bind:_callBack="addPilot"
+        showNavigator="rollback"
+>
+</navbar>
+<view class="item-box">
+    <view class="item">
+        <view class="name">地块名称</view>
+        <input class="input" placeholder="录入地块名称" value="{{name}}" />
+    </view>
+    <view class="item">
+        <view class="name">作物类型</view>
+        <input class="input" placeholder="作物类型" value="{{crop}}" />
+    </view>
+    <view class="item">
+        <view class="name">地块面积</view>
+        <input class="input" placeholder="地块面积" disabled="true" value="{{area}}" />
+    </view>
+    <view class="but">
+        <button
+                form-type="submit"
+                type="primary"
+                bindtap="submitEdit"
+        > 修 改 </button>
+    </view>
+</view>

@@ -20,7 +20,7 @@
                 <view class='float-m' data-index="{{index}}">{{item.area}} 亩</view>
             </view>
             <view data-index="{{index}}">
-                <view bind:tap="editItem" data-index="{{index}}" class="inner edit">进行修改</view>
+                <view bindtap="editItem" data-index="{{index}}" class="inner edit">进行修改</view>
             </view>
         </view>
     </view>

@@ -14,7 +14,11 @@ Page({
   onLoad: function (options) {
         // customer/account/record/list
   },
-
+  checkList:function(){
+    wx.navigateTo({
+      url: '/pages/expense/expense'
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

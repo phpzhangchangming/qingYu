@@ -131,11 +131,15 @@ Page({
             editBtnWidth:editBtnWidth
         });
     },
-    editItem:function(){
+    editItem:function(e){
+        let index = e.currentTarget.dataset.index;
+        let id = this.data.list[index].id;
+        let name = this.data.list[index].name;
+        let area = this.data.list[index].area;
+        let crop = this.data.list[index].crop;
         wx.navigateTo({
-            url: '../flight/flight',
+            url: `/pages/ground/groundedit?id=${id}&name=${name}&area=${area}&crop=${crop}`,
         });
-        console.log('editItem');
     },
 
 })

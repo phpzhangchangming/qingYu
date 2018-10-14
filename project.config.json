@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.3.0",
 	"appid": "wxdc4a9ab4c9365676",
-	"projectname": "uav",
+	"projectname": "%E9%9D%92%E7%A6%B9",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -65,7 +65,13 @@
 				{
 					"id": -1,
 					"name": "个人中心",
-					"pathName": "pages/user/user"
+					"pathName": "pages/user/user",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "修改地块",
+					"pathName": "pages/ground/groundedit"
 				}
 			]
 		}
