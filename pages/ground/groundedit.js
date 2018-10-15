@@ -23,13 +23,31 @@ Page({
         });
     },
     submitEdit:function(){
-        wx.request({
-            url:getApp().globalData.url+'/',
-            data:{
+        let that = this;
+        let plantingStructure = this.data.crop;
+        let name = this.data.name;
+        let farmlandId = this.data.id;
+        wx.getStorage({
+            key: 'userInfo',
+            success: function (res) {
+                wx.request({
+                    url: getApp().globalData.url + '/farmland/add',
+                    data: {
+                        userId: res.data.id,
+                        farmlandId: farmlandId,
+                        name:name,
+                        plantingStructure: plantingStructure
+                    },
+                    success: function (res) {
+                        if(res.result == 1){
+                            wx.switchTab({
+                                url: '/pages/ground/ground'
+                            })
+                        }else{
 
-            },
-            success:function(){
-
+                        }
+                    }
+                })
             }
         })
     },

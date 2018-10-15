@@ -5,6 +5,7 @@
     "pages/pilot/pilotList",
     "pages/pilotAdd/pilotAdd",
     "pages/user/user",
+    "pages/topUp/topUp",
     "pages/expense/expense",
     "pages/ground/ground",
     "pages/ground/groundedit",

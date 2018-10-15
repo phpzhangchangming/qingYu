@@ -7,20 +7,20 @@
 <view class="item-box">
     <view class="item">
         <view class="left">客户名称</view>
-        <view class="">优路创科</view>
+        <view class="">{{customerName}}</view>
     </view>
     <view class="item">
         <view class="left">用户名称</view>
-        <view class="">张三</view>
+        <view class="">{{userName}}</view>
     </view>
     <view class="item">
         <view class="left">手机号码</view>
-        <view class="">15311571111</view>
+        <view class="">{{phone}}</view>
     </view>
     <view class="item">
         <view class="left">账户余额</view>
-        <view class="left">2563.00</view>
-        <view class='right'>></view>
+        <view class="left">{{money}}</view>
+        <view class='right' bindtap='topUp'>充值</view>
     </view>
     <view class="item">
         <view class="left">消费记录</view>
@@ -28,6 +28,6 @@
     </view>
     <view class="item">
         <view class="left">版本</view>
-        <view class="">1.0</view>
+        <view class="">{{version}}</view>
     </view>
 </view>

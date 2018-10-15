@@ -2,23 +2,15 @@
         titleMsg="消费记录"
         bind:_callBack="addPilot"
         showNavigator="rollback"
-
 >
 </navbar>
 <view class="item-box">
     <view class="items">
         <view wx:for="{{list}}" wx:key="{{index}}" class="item">
-            <view
-                    data-index="{{index}}"
-                    style="{{item.txtStyle}}"
-                    class="inner txt"
-            >
-                <view class="float-l" data-index="{{index}}">{{item.name}}</view>
-                <view class="float-r" data-index="{{index}}">{{item.crop}}</view>
-                <view class='float-m' data-index="{{index}}">{{item.area}} 亩</view>
-            </view>
-            <view data-index="{{index}}">
-                <view bindtap="editItem" data-index="{{index}}" class="inner edit">进行修改</view>
+            <view data-index="{{index}}" class="inner txt">
+                <view class="float-l" data-index="{{index}}">{{item.typeDesc}}</view>
+                <view class="float-r" data-index="{{index}}">{{item.amount}}</view>
+                <view class='float-m' data-index="{{index}}">{{item.time}}</view>
             </view>
         </view>
     </view>

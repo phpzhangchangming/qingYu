@@ -58,7 +58,9 @@ App({
         openid: 0,
         wx_url_1: 'https://api.weixin.qq.com/sns/jscode2session?appid=wxdc4a9ab4c9365676&secret=4f520844fbbc3d132a80fa5ea4ffe79b&js_code=',
         wx_url_2: '&grant_type=authorization_code',
-        url: 'http://test.api.tsingyutech.com:8088/uav/api',
-        verifyCode:''
+        //url: 'http://test.api.tsingyutech.com:8088/uav/api',
+        url:'https://api.tsingyutech.com/uav',
+        verifyCode:'',
+        version:'1.0'
     }
 });

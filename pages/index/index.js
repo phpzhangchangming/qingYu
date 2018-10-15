@@ -5,7 +5,7 @@ Page({
         longitude: 0,
         scale: '10', //缩放级别
         markers: [],
-        mapHeight: App.globalData.height - App.globalData.navHeight,
+        mapHeight: App.globalData.height - App.globalData.navHeight - 46,
         navHeight: App.globalData.navHeight,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         showMap:false
@@ -14,6 +14,8 @@ Page({
         this.getData();
     },
     getData:function () {
+        console.log(getApp().globalData.url + '/uav/getUAVList')
+        return;
         var that = this;
         wx.request({
             url: getApp().globalData.url+'/uav/getUAVList',

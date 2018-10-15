@@ -1,17 +1,14 @@
 view {
     box-sizing: border-box;
 }
-
 .item-box {
     width: 100%;
     margin: 130rpx auto 0;
     padding:0;
 }
-
 .items {
     width:100%;
 }
-
 .item {
     position:relative;
     border-bottom:2rpx solid #BEBEBE;
@@ -19,16 +16,13 @@ view {
     line-height: 100rpx;
     overflow: hidden;
 }
-
 .item:last-child {
     border:0;
 }
-
 .inner {
     position: absolute;
     top: 0;
 }
-
 .inner.txt {
     background-color:#fff;
     width: 100%;
@@ -40,20 +34,6 @@ view {
     text-overflow: ellipsis;
     font-size: 38rpx;
 }
-
-
-.inner.edit {
-    text-align: center;
-    z-index: 4;
-    right: 0;
-    color: #fff;
-    font-size: 30rpx;
-    background-color: #66666E;
-    width: 180rpx;
-    height:140rpx;
-    line-height:140rpx;
-}
-
 .inner .float-l{
     width:500rpx;
     float: left;

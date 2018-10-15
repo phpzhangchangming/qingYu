@@ -90,6 +90,7 @@ Page({
                 'content-type': 'application/json'
             },
             success: function(res) { //从数据库获取用户信息
+                
                 if(res.data.result == 0){
                     wx.showModal({
                         title: '通知',
@@ -98,8 +99,27 @@ Page({
                         confirmText: '确定',
                     })
                 }else{
-                    let token = res.data.data.token;
-                    App.globalData.userInfo['token'] = token;
+                    wx.setStorage({
+                        key:'userInfo',
+                        data: {
+                            id: res.data.data.id,
+                            token: res.data.data.token,
+                            customerName: res.data.data.customerName,
+                            phone: res.data.data.phone,
+                            name: res.data.data.name,
+                        }
+                    })
+                    // console.log(res.data.data);
+                    // createTime:"2018-06-27 16:51:49"
+                    // customer:null
+                    // customerId:2
+                    // customerName:"优路创科"
+                    // id:1
+                    // name:"123ss"
+                    // phone:"15311574613"
+                    // status:3
+                    // token:"94fde42a-3f6c-48df-9e56-7d9941ba0ec6"
+                    // userType:1
                     wx.switchTab({
                         url: '/pages/index/index'
                     })

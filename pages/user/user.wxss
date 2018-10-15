@@ -16,4 +16,5 @@
 }
 .right{
     float: right;
+    font-size:30rpx;
 }
