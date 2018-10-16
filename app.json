@@ -10,8 +10,6 @@
     "pages/ground/ground",
     "pages/ground/groundedit",
     "pages/flight/flight",
-    "pages/uav/map",
-    "pages/logs/logs",
     "components/navbar/navbar"
   ],
   "window": {

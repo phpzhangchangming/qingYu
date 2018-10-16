@@ -1,8 +1,6 @@
-//app.js
 App({
     onLaunch: function() {
         var that = this;
-        
         wx.getSystemInfo({
             success: res => {
                 that.globalData.navHeight = res.statusBarHeight + 46;
@@ -15,7 +13,6 @@ App({
     },
     globalData: {
         userInfo: [],
-        apiPrefix: "http://localhost:8080/api",
         height: 0,
         share: false,
         openid: 0,

@@ -1,27 +1,14 @@
-/* pages/pilot/pilotList.wxss*/
-/*.text-box{
-    z-index: 50;
-    width:20px;
-    height:20px;
-    background:#ccc;
-    position:absolute;
-
-}*/
-
 view {
     box-sizing: border-box;
 }
-
 .item-box {
     width: 100%;
     margin: 130rpx auto 0;
     padding:0;
 }
-
 .items {
     width:100%;
 }
-
 .item {
     position:relative;
     border-bottom:2rpx solid #BEBEBE;
@@ -30,16 +17,13 @@ view {
     overflow: hidden;
     font-size:38rpx;
 }
-
 .item:last-child {
     border:0;
 }
-
 .inner {
     position: absolute;
     top: 0;
 }
-
 .inner.txt {
     background-color:#fff;
     width: 100%;
@@ -50,7 +34,6 @@ view {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 .inner.edit,.inner.del,.inner.delConfirm {
     text-align: center;
     z-index: 4;

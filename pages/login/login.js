@@ -1,6 +1,6 @@
 const App = getApp();
 Page({
-    data: { //判断小程序的API，回调，参数，组件等是否在当前版本可用。
+    data: {
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         login: true,
         show: true,
@@ -9,12 +9,12 @@ Page({
         showTime:false
     },
     onLoad: function() {
-        var that = this; // 查看是否授权
+        var that = this;
         wx.getSetting({
             success: function(res) {
                 if (res.authSetting['scope.userInfo']) {
                     wx.getUserInfo({
-                        success: function(res) { //从数据库获取用户信息
+                        success: function(res) {
                             wx.switchTab({
                                 url: '/pages/index/index'
                             })
@@ -46,7 +46,7 @@ Page({
             header: {
                 'content-type': 'application/json'
             },
-            success: function(res) { //从数据库获取用户信息
+            success: function(res) {
                 if(res.data.result == 0){
                     wx.showModal({
                         title: '通知',
@@ -75,10 +75,9 @@ Page({
         }
     },
     phoneLogin: function(e) {
-        var that = this; //插入登录的用户的相关信息到数据库
+        var that = this;
         let phone = e.detail.value.phone;
         let verifyCode = e.detail.value.verifyCode;
-        // 
         wx.request({
             url: getApp().globalData.url + 'user/login',
             data: {
@@ -88,8 +87,7 @@ Page({
             header: {
                 'content-type': 'application/json'
             },
-            success: function(res) { //从数据库获取用户信息
-                
+            success: function(res) {
                 if(res.data.result == 0){
                     wx.showModal({
                         title: '通知',

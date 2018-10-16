@@ -43,7 +43,7 @@ Page({
                         name: name,
                         phone: phone
                     },
-                    success: function (res) {                    //从数据库获取用户信息
+                    success: function (res) {
                         wx.hideLoading();
                         if (res.data.result != 1) {
                             wx.showModal({

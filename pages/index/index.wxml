@@ -4,7 +4,6 @@
         show='false'
 >
 </navbar>
-
 <map
         wx:if="{{showMap}}"
         id="myMap"

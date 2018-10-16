@@ -6,7 +6,6 @@ page{
     padding:10% 0 0;
     margin:130rpx auto 0;
 }
-
 .item-box .phone,.item-box .name{
     background:#fff;
     height:80rpx;
@@ -20,7 +19,6 @@ page{
 .item-box .phone {
     border-top:4rpx solid #F5F5F5
 }
-
 .item-box .but button {
     margin-top: 50rpx;
     width: 86%;
