@@ -1,0 +1,19 @@
+<navbar
+        titleMsg="充值中心"
+        bind:_callBack="addPilot"
+        showNavigator="rollback"
+>
+</navbar>
+<view class="item-box">
+    <view class="item">
+        <view class="name">充值金额</view>
+        <input class="input" placeholder="0.00" type='digit' value="{{money}}" bindinput="bindMoney" />
+    </view>
+    <view class="but">
+        <button
+                form-type="submit"
+                type="primary"
+                bindtap="topUP"
+        > 充 值 </button>
+    </view>
+</view>

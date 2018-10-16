@@ -1,0 +1,26 @@
+page{
+    background: #EEEEEE;
+}
+.item-box {
+    width: 100%;
+    margin: 130rpx auto 0;
+    padding:10% 0 0;
+    font-size: 38rpx;
+}
+.item{
+    height:80rpx;
+    padding:40rpx 30rpx 0;
+    border-top:4rpx solid #F5F5F5;
+    background:#fff;
+}
+.item .name {
+    float:left;
+    margin-right:40rpx;
+}
+.item-box .but button {
+    margin-top: 50rpx;
+    width: 86%;
+    background: #13A8A0;
+    padding:10rpx;
+    font-size: 38rpx;
+}
