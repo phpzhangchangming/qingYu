@@ -12,7 +12,7 @@
         </view>
         <view class="phone">
             <view>联系电话</view>
-            <input placeholder-style="color:#C8C8C8" placeholder="录入联系电话" type="number"  name="phone" value="{{phone}}" />
+            <input placeholder-style="color:#C8C8C8" maxlength='11' placeholder="录入联系电话" type="number"  name="phone" value="{{phone}}" />
         </view>
         <view class="but">
             <button

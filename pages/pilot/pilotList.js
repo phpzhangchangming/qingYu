@@ -92,7 +92,6 @@ Page({
             return real;
         } catch (e) {
             return false;
-            //Do something when catch error
         }
     },
     initEleWidth: function () {
@@ -103,85 +102,96 @@ Page({
             editBtnWidth: editBtnWidth
         });
     },
-    editItem: function (e) {
-        console.log(e.currentTarget);
-        return;
-        let id = '';
-        wx.redirectTo({
-            url: "../pilotAdd/pilotAdd?asdf=12"
-        })
-        console.log('editItem');
-    },
     delItemVerify: function () {//删除确认。
         this.setData({hidden: false});
     },
     delItemConfirm: function (e) {//删除
-        let taht = this;
-        let pilotId = '';
-
-        wx.request({
-            url: getApp().globalData.url + '/user/deletePilot',
-            data: {
-                userId:1,
-                pilotId:1
-            },
-            success: function(res) {    //从数据库获取用户信息
-
-                if(res.data.result == 0){
-                    wx.showModal({
-                        title: '通知',
-                        content: '删除失败',
-                        showCancel: false,
-                        confirmText: '确定',
-                    })
-                }else{
-                    wx.showToast({
-                        title: '已删除',
-                        icon: 'success',
-                        duration: 1000,
-                        complete: function () {
-                            setTimeout(function () {
-                                //获取列表中要删除项的下标
-                                var index = e.target.dataset.index;
-                                var list = taht.data.list;
-                                //移除列表中下标为index的项
-                                list.splice(index, 1);
-                                //更新列表的状态
-                                taht.setData({
-                                    list: list
-                                });
-                                taht.setData({hidden: true});
-                            }, 1000);
-                        }
-                    });
-                }
-            }
+        wx.showLoading({
+            title: '删除中...',
+            mask: true
         });
+        let taht = this;
+        let pilotId = e.currentTarget.dataset.pointId;
+        var that = this;
+        wx.getStorage({
+            key: 'userInfo',
+            success: function (res) {
+                let userId = res.data.id;
+                let token = res.data.token;
+                wx.request({
+                    url: getApp().globalData.url + 'user/deletePilot',
+                    data: {
+                        userId: userId,
+                        token:token,
+                        pilotId: pilotId
+                    },
+                    success: function (res) {    //从数据库获取用户信息
+                        wx.hideLoading();
+                        if (res.data.result == 0) {
+                            wx.showModal({
+                                title: '通知',
+                                content: '删除失败',
+                                showCancel: false,
+                                confirmText: '确定',
+                            })
+                        } else {
+                            wx.showToast({
+                                title: '已删除',
+                                icon: 'success',
+                                duration: 1000,
+                                complete: function () {
+                                    setTimeout(function () {
+                                        //获取列表中要删除项的下标
+                                        var index = e.target.dataset.index;
+                                        var list = taht.data.list;
+                                        //移除列表中下标为index的项
+                                        list.splice(index, 1);
+                                        //更新列表的状态
+                                        taht.setData({
+                                            list: list
+                                        });
+                                        taht.setData({ hidden: true });
+                                    }, 1000);
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        })
     },
     //测试临时数据
     getData: function () {
         var that = this;
-        wx.request({
-            url: getApp().globalData.url+'/user/getPilotList',
-            data: {
-                userId:1
-            },
-            header: {'content-type': 'application/json'},
-            success: function (res) {                    //从数据库获取用户信息
-                wx.hideLoading();
-
-                if(res.data.result != 1){
-                    wx.showModal({
-                        title: '通知',
-                        content: '正在维护中，请稍后',
-                        showCancel: false,
-                        confirmText: '确定',
-                        success: function (res) {}
-                    })
-                }else{
-                    that.setData({ list: res.data.data });
-                }
+        var that = this;
+        wx.getStorage({
+            key: 'userInfo',
+            success: function (res) {
+                let userId = res.data.id;
+                let token = res.data.token;
+                wx.request({
+                    url: getApp().globalData.url + 'user/getPilotList',
+                    data: {
+                        userId: userId,
+                        token:token
+                    },
+                    header: { 'content-type': 'application/json' },
+                    success: function (res) {                    //从数据库获取用户信息
+                        wx.hideLoading();
+                        if (res.data.result != 1) {
+                            wx.showModal({
+                                title: '通知',
+                                content: '正在维护中，请稍后',
+                                showCancel: false,
+                                confirmText: '确定',
+                                success: function (res) { }
+                            })
+                        } else {
+                            that.setData({ list: res.data.data });
+                        }
+                    }
+                });
             }
-        });
+        })
     }
 })

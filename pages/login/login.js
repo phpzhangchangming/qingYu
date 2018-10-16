@@ -15,7 +15,6 @@ Page({
                 if (res.authSetting['scope.userInfo']) {
                     wx.getUserInfo({
                         success: function(res) { //从数据库获取用户信息
-                            that.queryUsreInfo(); //用户已经授权过
                             wx.switchTab({
                                 url: '/pages/index/index'
                             })
@@ -37,29 +36,29 @@ Page({
 
         this.setData({showTime:true});
 
-        // let phone = this.data.phone;
-        // let that = this;
-        // wx.request({
-        //     url: getApp().globalData.url + '/user/getVerifyCode',
-        //     data: {
-        //         phone:phone
-        //     },
-        //     header: {
-        //         'content-type': 'application/json'
-        //     },
-        //     success: function(res) { //从数据库获取用户信息
-        //         if(res.data.result == 0){
-        //             wx.showModal({
-        //                 title: '通知',
-        //                 content: '登录失败，请核实信息',
-        //                 showCancel: false,
-        //                 confirmText: '确定',
-        //             })
-        //         }else{
-        //             that.setTime();
-        //         }
-        //     }
-        // })
+        let phone = this.data.phone;
+        let that = this;
+        wx.request({
+            url: getApp().globalData.url + 'user/getVerifyCode',
+            data: {
+                phone:phone
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function(res) { //从数据库获取用户信息
+                if(res.data.result == 0){
+                    wx.showModal({
+                        title: '通知',
+                        content: '登录失败，请核实信息',
+                        showCancel: false,
+                        confirmText: '确定',
+                    })
+                }else{
+                    that.setTime();
+                }
+            }
+        })
     },
     countDown:function(){
         if(this.data.time == 0){
@@ -79,9 +78,9 @@ Page({
         var that = this; //插入登录的用户的相关信息到数据库
         let phone = e.detail.value.phone;
         let verifyCode = e.detail.value.verifyCode;
-
+        // 
         wx.request({
-            url: getApp().globalData.url + '/user/login',
+            url: getApp().globalData.url + 'user/login',
             data: {
                 phone:phone,
                 verifyCode:verifyCode
@@ -99,6 +98,19 @@ Page({
                         confirmText: '确定',
                     })
                 }else{
+                    wx.login({
+                        success: res => {
+                            wx.request({
+                                url: that.globalData.url_openid,
+                                data: {
+                                    code: res.code,
+                                    id: res.data.data.id,
+                                    token: res.data.data.token
+                                },
+                                success: res => {}
+                            })
+                        }
+                    });
                     wx.setStorage({
                         key:'userInfo',
                         data: {
@@ -109,17 +121,6 @@ Page({
                             name: res.data.data.name,
                         }
                     })
-                    // console.log(res.data.data);
-                    // createTime:"2018-06-27 16:51:49"
-                    // customer:null
-                    // customerId:2
-                    // customerName:"优路创科"
-                    // id:1
-                    // name:"123ss"
-                    // phone:"15311574613"
-                    // status:3
-                    // token:"94fde42a-3f6c-48df-9e56-7d9941ba0ec6"
-                    // userType:1
                     wx.switchTab({
                         url: '/pages/index/index'
                     })
@@ -145,21 +146,5 @@ Page({
                 }
             })
         }
-    },
-    queryUsreInfo: function () { //获取用户信息接口
-        return '';
-        // wx.request({
-        //     url: getApp().globalData.urlPath + 'hstc_interface/queryByOpenid',
-        //     data: {
-        //         openid: getApp().globalData.openid
-        //     },
-        //     header: {
-        //         'content-type': 'application/json'
-        //     },
-        //     success: function(res) {
-        //         console.log(res.data);
-        //         getApp().globalData.userInfo = res.data;
-        //     }
-        // })
-    },
+    }
 })

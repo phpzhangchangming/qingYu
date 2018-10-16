@@ -1,60 +1,62 @@
 Page({
-
     data: {
-        editBtnWidth: 180,//删除按钮宽度单位（rpx）
+        editBtnWidth: 180,
         hidden:true,
-        list: [],
+        limit: 30,
+        list: []
     },
-
     onLoad: function (options) {
-        // 页面初始化 options为页面跳转所带来的参数
+        wx.showLoading({
+            title: '加载中...',
+        });
         this.initEleWidth();
         this.getData();
     },
     getData:function(){
         var that = this;
-        wx.request({
-            url: getApp().globalData.url+'/farmland/list',
-            data: {
-                uavId:1,
-                userId:1
-            },
-            header: {'content-type': 'application/json'},
-            success: function (res) {   //从数据库获取用户信息
-                let lists = res.data.data.list;
-                let list = [];
-                for (var index in lists) {
-                    // res.data.infos[index].info_file = res.data.infos[index].info_file.split(',');
-                    list.push({
-                        'id':lists[index].id,
-                        'name': lists[index].name,
-                        'crop': lists[index].plantingStructure,
-                        'area':lists[index].area
-                    });
-                }
-                that.setData({list:list})
+        wx.getStorage({
+            key: 'userInfo',
+            success: function (res) {
+                let userId = res.data.id;
+                let token = res.data.token;
+                wx.request({
+                    url: getApp().globalData.url + 'farmland/list',
+                    data: {
+                        userId: userId,
+                        token:token,
+                        limit:that.data.limit
+                    },
+                    header: { 'content-type': 'application/json' },
+                    success: function (res) {
+                        wx.hideLoading();
+                        if (res.result == 0) {
+                            wx.showModal({
+                                title: '通知',
+                                content: '正在维护中，请稍后',
+                                showCancel: false,
+                                confirmText: '确定'
+                            })
+                            return;
+                        }
+                        let lists = res.data.data.list;
+                        let list = [];
+                        for (var index in lists) {
+                            list.push({
+                                'id': lists[index].id,
+                                'name': lists[index].name,
+                                'crop': lists[index].plantingStructure,
+                                'area': lists[index].area
+                            });
+                        }
+                        that.setData({ list: list })
+                    }
+                });
             }
         });
-    },
-    onReady: function () {
-        // 页面渲染完成
-    },
-
-    onShow: function () {
-        // 页面显示
-    },
-
-    onHide: function () {
-        // 页面隐藏
-    },
-
-    onUnload: function () {
-        // 页面关闭
     },
     touchS:function(e){
         if(e.touches.length==1){
             this.setData({
-                //设置触摸起始点水平方向位置
                 startX:e.touches[0].clientX
             });
         }

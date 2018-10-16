@@ -7,11 +7,11 @@
 <view class="item-box">
     <view class="item">
         <view class="name">地块名称</view>
-        <input class="input" placeholder="录入地块名称" value="{{name}}" />
+        <input class="input" placeholder="录入地块名称" value="{{name}}" bindinput='changeName' />
     </view>
     <view class="item">
         <view class="name">作物类型</view>
-        <input class="input" placeholder="作物类型" value="{{crop}}" />
+        <input class="input" placeholder="作物类型" value="{{crop}}" bindinput='changePlaceholder'/>
     </view>
     <view class="item">
         <view class="name">地块面积</view>
