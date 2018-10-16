@@ -12,15 +12,20 @@ Page({
         var that = this;
         wx.getSetting({
             success: function(res) {
-                if (res.authSetting['scope.userInfo']) {
+                let userinfo = wx.getStorageSync('userInfo');
+                if (res.authSetting['scope.userInfo'] && !userinfo) {
+                    that.setData({
+                        show: false
+                    });
+                } else if (res.authSetting['scope.userInfo']) {
                     wx.getUserInfo({
-                        success: function(res) {
+                        success: function (res) {
                             wx.switchTab({
                                 url: '/pages/index/index'
                             })
                         }
                     });
-                } else {
+                }else{
                     that.setData({
                         login: false
                     });
@@ -33,9 +38,7 @@ Page({
     },
     getVerifyCode:function(){
         this.countDown();
-
         this.setData({showTime:true});
-
         let phone = this.data.phone;
         let that = this;
         wx.request({
@@ -50,12 +53,10 @@ Page({
                 if(res.data.result == 0){
                     wx.showModal({
                         title: '通知',
-                        content: '登录失败，请核实信息',
+                        content: '获取验证码失败',
                         showCancel: false,
                         confirmText: '确定',
                     })
-                }else{
-                    that.setTime();
                 }
             }
         })
@@ -78,6 +79,19 @@ Page({
         var that = this;
         let phone = e.detail.value.phone;
         let verifyCode = e.detail.value.verifyCode;
+        if (!verifyCode){
+            wx.showModal({
+                title: '通知',
+                content: '请填写验证码',
+                showCancel: false,
+                confirmText: '确定',
+            })
+            return;
+        }
+        wx.showLoading({
+            title: '登录中...',
+            mask: true
+        });
         wx.request({
             url: getApp().globalData.url + 'user/login',
             data: {
@@ -88,7 +102,8 @@ Page({
                 'content-type': 'application/json'
             },
             success: function(res) {
-                if(res.data.result == 0){
+                if (res.data.result == 0) {
+                    wx.hideLoading();
                     wx.showModal({
                         title: '通知',
                         content: '登录失败，请核实信息',
@@ -97,31 +112,30 @@ Page({
                     })
                 }else{
                     wx.login({
-                        success: res => {
+                        success: resLogin => {
                             wx.request({
-                                url: that.globalData.url_openid,
+                                url: getApp().globalData.url + 'wechat/getMiniProgramOpenid',
                                 data: {
-                                    code: res.code,
-                                    id: res.data.data.id,
+                                    code: resLogin.code,
+                                    userId: res.data.data.id,
                                     token: res.data.data.token
                                 },
-                                success: res => {}
+                                success: resUrl => {
+                                    wx.hideLoading();
+                                    wx.setStorageSync('userInfo',{
+                                        id: res.data.data.id,
+                                        token: res.data.data.token,
+                                        customerName: res.data.data.customerName,
+                                        phone: res.data.data.phone,
+                                        name: res.data.data.name,
+                                    })
+                                    wx.switchTab({
+                                        url: '/pages/index/index'
+                                    })
+                                }
                             })
                         }
                     });
-                    wx.setStorage({
-                        key:'userInfo',
-                        data: {
-                            id: res.data.data.id,
-                            token: res.data.data.token,
-                            customerName: res.data.data.customerName,
-                            phone: res.data.data.phone,
-                            name: res.data.data.name,
-                        }
-                    })
-                    wx.switchTab({
-                        url: '/pages/index/index'
-                    })
                 }
             }
         })

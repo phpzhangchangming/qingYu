@@ -5,7 +5,7 @@ page{
     width: 100%;
     margin: 130rpx auto 0;
     padding:10% 0 0;
-    font-size: 38rpx;
+    font-size: 36rpx;
 }
 .item{
     height:80rpx;
@@ -22,5 +22,5 @@ page{
     width: 86%;
     background: #13A8A0;
     padding:10rpx;
-    font-size: 38rpx;
+    font-size: 36rpx;
 }

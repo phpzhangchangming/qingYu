@@ -17,7 +17,7 @@
     padding-top: 26rpx;
     height: 60rpx;
     line-height: 60rpx;
-    font-size:38rpx;
+    font-size:36rpx;
 }
 .listTop .left,.listTop .middle,.listTop .right{
     float: left;

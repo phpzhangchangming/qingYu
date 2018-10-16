@@ -32,7 +32,7 @@ view {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 38rpx;
+    font-size: 36rpx;
 }
 .inner.edit {
     text-align: center;

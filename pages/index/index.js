@@ -11,10 +11,20 @@ Page({
         showMap:false
     },
     onLoad: function () {
+        wx.showLoading({
+            title: '加载中...',
+            mask: true
+        });
         this.getData();
     },
     getData:function () {
-        var that = this;
+        let that = this;
+        let userinfo =  wx.getStorageSync('userInfo');
+        if (!userinfo){
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
         wx.getStorage({
             key: 'userInfo',
             success: function (res) {
@@ -28,6 +38,7 @@ Page({
                     },
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
+                        wx.hideLoading();
                         if (res.data.result == 0) {
                             wx.showModal({
                                 title: '通知',

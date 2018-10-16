@@ -15,7 +15,7 @@ view {
     height: 120rpx;
     line-height: 120rpx;
     overflow: hidden;
-    font-size:38rpx;
+    font-size:36rpx;
 }
 .item:last-child {
     border:0;

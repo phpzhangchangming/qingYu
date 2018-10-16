@@ -5,6 +5,10 @@ Page({
         money: ''
     },
     topUP: function() {
+        wx.showLoading({
+            title: '充值中...',
+            mask: true
+        });
         let amount = this.data.money;
         wx.getStorage({
             key: 'userInfo',
@@ -20,20 +24,42 @@ Page({
                         'content-type': 'application/json'
                     },
                     success: function(res) {
+                        wx.hideLoading();
+                        if (res.data.result == 0) {
+                            wx.showModal({
+                                title: '通知',
+                                content: '充值失败，请重试',
+                                showCancel: false,
+                                confirmText: '确定',
+                            })
+                            return;
+                        }
                         let timeStamp = res.data.data.timeStamp;
                         let nonceStr = res.data.data.nonceStr;
                         let packageStr = res.data.data.package;
                         let signType = res.data.data.signType;
                         let paySign = res.data.data.paySign;
-
                         wx.requestPayment({
                             timeStamp: timeStamp,
                             nonceStr: nonceStr,
                             package: packageStr,
                             signType: signType,
                             paySign: paySign,
-                            success: function (e) {},
-                            fail: function (e) {}
+                            success: function (e) {
+                                wx.reLaunch({
+                                    url: "/pages/user/user"
+                                })
+                            },
+                            fail: function (e) {
+                                console.log(e);
+                                wx.showModal({
+                                    title: '通知',
+                                    content: '充值失败，请重试',
+                                    showCancel: false,
+                                    confirmText: '确定',
+                                    success: function (res) { }
+                                })
+                            }
                         })
                     }
                 })

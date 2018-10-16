@@ -1,7 +1,7 @@
 .item-box{
     background:#fff;
     margin:130rpx auto 0;
-    font-size:38rpx;
+    font-size:36rpx;
 }
 .item{
     height: 120rpx;
