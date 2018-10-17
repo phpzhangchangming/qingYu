@@ -31,18 +31,19 @@ Page({
                 let token = res.data.token;
                 let name = e.detail.value.name;
                 let phone = e.detail.value.phone;
+                let data = {
+                    userId :userId,
+                    token:token,
+                    id:that.data.id,
+                    name:name,
+                    phone:phone
+                };
                 if (that.data.type == 'add') {
                     delete (data.id);
                 }
                 wx.request({
                     url: getApp().globalData.url + 'user/savePilot',
-                    data: {
-                        userId: userId,
-                        token: token,
-                        id: that.data.id,
-                        name: name,
-                        phone: phone
-                    },
+                    data: data,
                     success: function (res) {
                         wx.hideLoading();
                         if (res.data.result != 1) {

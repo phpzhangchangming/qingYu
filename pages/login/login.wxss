@@ -46,6 +46,9 @@ input{
     background: #fff;
     margin-top:-4rpx;
 }
+.phone text,.verify text{
+    font-size: 36rpx;
+}
 .sub{
     background: #13A8A0;
     width: 80%;

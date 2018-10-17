@@ -9,7 +9,7 @@ Page({
         showTime:false
     },
     onLoad: function() {
-        var that = this;
+        let that = this;
         wx.getSetting({
             success: function(res) {
                 let userinfo = wx.getStorageSync('userInfo');
