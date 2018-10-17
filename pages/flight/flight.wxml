@@ -1,22 +1,19 @@
-<navbar
-        titleMsg="飞行列表"
-        data-show="asdf"
-        bind:_callBack="addPilot"
-        show="false"
->
+<navbar titleMsg="飞行列表" data-show="asdf" bind:_callBack="addPilot" show="false">
 </navbar>
-<view class="item-box">
-    <view class="items">
-        <view wx:for="{{list}}" wx:key="{{index}}" class="item">
-            <view class="listTop">
-                <view class="left">{{item.name}}</view>
-                <view class="middle">{{item.fTime}}</view>
-                <view class="right">{{item.distance}}M<view class="sub">2</view></view>
-            </view>
-            <view class="listButtom">
-                <view class="left">飞机：{{item.num}}</view>
-                <view class="right">{{item.time}}</view>
+<scroll-view class='scroll' scroll-y='true'>
+    <view class="item-box">
+        <view class="items">
+            <view wx:for="{{list}}" wx:key="{{index}}" class="item">
+                <view class="listTop">
+                    <view class="left">{{item.name}}</view>
+                    <view class="middle">{{item.fTime}}</view>
+                    <view class="right">{{item.sprayAreaMu}}亩</view>
+                </view>
+                <view class="listButtom">
+                    <view class="left">飞机：{{item.num}}</view>
+                    <view class="right">{{item.time}}</view>
+                </view>
             </view>
         </view>
     </view>
-</view>
+</scroll-view>

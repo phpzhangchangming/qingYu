@@ -40,3 +40,7 @@
 .hidden{
   overflow: hidden;
 }
+.scroll{
+  position: absolute;
+  bottom: 0;
+}

@@ -5,7 +5,8 @@ Page({
         limit: 20,
         goOnLoad: true
     },
-    onLoad: function (options) {
+    onLoad: function (options) {},
+    onShow: function () {
         this.getData();
     },
     getData: function () {

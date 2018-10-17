@@ -12,8 +12,10 @@
                     bind:touchmove="touchM"
                     bind:touchend="touchE"
                     data-index="{{index}}"
+                    data-id="{{item.id}}"
                     style="{{item.txtStyle}}"
                     class="inner txt"
+                    bindtap='clickDetail'
             >
                 <view class="float-l" data-index="{{index}}">{{item.name}}</view>
                 <view class="float-r" data-index="{{index}}">{{item.crop}}</view>

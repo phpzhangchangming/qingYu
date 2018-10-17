@@ -10,6 +10,7 @@
     "pages/ground/ground",
     "pages/ground/groundedit",
     "pages/flight/flight",
+    "pages/map/map",
     "components/navbar/navbar"
   ],
   "window": {

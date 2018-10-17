@@ -29,7 +29,7 @@ Page({
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.result == 0) {
+                        if (res.data.result == 0) {
                             wx.showModal({
                                 title: '通知',
                                 content: '正在维护中，请稍后',
@@ -127,5 +127,10 @@ Page({
             url: `/pages/ground/groundedit?id=${id}&name=${name}&area=${area}&crop=${crop}`,
         });
     },
-
+    clickDetail:function(e){
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: `/pages/map/map?id=${id}`,
+        })
+    }
 })

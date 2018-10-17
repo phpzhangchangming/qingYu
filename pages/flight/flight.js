@@ -5,11 +5,15 @@ Page({
         limit:20,
         goOnLoad:true
     },
-    onLoad: function (options) {
+    onLoad: function () {},
+    onShow: function () {
         wx.showLoading({
             title: '加载中...'
         });
         this.getData();
+    },
+    onHide:function(){
+        this.setData({page:1,goOnLoad:true});
     },
     onReachBottom: function () {
         if (!this.data.goOnLoad){
@@ -56,8 +60,8 @@ Page({
                                 id: lists[index].id,
                                 name: lists[index].pilotName,
                                 num: lists[index].uavHardwareSn,
-                                fTime: lists[index].flyDuration + '秒',
-                                distance: lists[index].flyTotalDistance,
+                                fTime: that.timeChange(lists[index].flyDuration),
+                                sprayAreaMu: lists[index].sprayAreaMu,
                                 time: lists[index].flyStartTime,
                             });
                         }
@@ -102,13 +106,14 @@ Page({
                         }
                         let lists = res.data.data.list;
                         let list = [];
+                        let time = 0;
                         for (var index in lists) {
                             list.push({
                                 id: lists[index].id,
                                 name: lists[index].pilotName,
                                 num: lists[index].uavHardwareSn,
-                                fTime: lists[index].flyDuration + '秒',
-                                distance: lists[index].flyTotalDistance,
+                                fTime: that.timeChange(lists[index].flyDuration),
+                                sprayAreaMu: lists[index].sprayAreaMu,
                                 time: lists[index].flyStartTime,
                             });
                         }
@@ -117,5 +122,16 @@ Page({
                 });
             }
         });
+    },
+    timeChange:function(time){
+        let f = String(parseInt(time / 60));
+        let m = parseInt(time % 60) + '秒';
+        if(f.length == 1){
+            f = '0' + f + '分';
+        }else{
+            f = f + '分';
+        }
+
+        return f + m;
     }
 })

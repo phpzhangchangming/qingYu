@@ -3,7 +3,7 @@ Page({
         customerName: '',
         userName: '',
         phone: '',
-        money: '',
+        money: '正在统计',
         version:getApp().globalData.version
     },
     onLoad: function() {

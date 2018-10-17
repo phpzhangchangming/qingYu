@@ -33,12 +33,12 @@
     margin-right: 3.5%;
     text-align: right;
 }
-.listTop .right .sub{
+/* .listTop .right .sub{
     float: right;
     font-size: 24rpx;
     line-height: 30rpx;
     margin-left: 2rpx;
-}
+} */
 .listButtom{
     clear: both;
     height:50rpx;
