@@ -1,0 +1,17 @@
+<navbar
+        titleMsg="飞机位置"
+        bind:_callBack="addPilot"
+        showNavigator="rollback"
+>
+</navbar>
+<map
+        wx:if="{{showMap}}"
+        id="myMap"
+        style="width: 100%; height: {{mapHeight}}px;margin-top:{{navHeight}}px;"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        scale="{{scale}}"
+        polygons="{{polygons}}"
+        polyline="{{polyline}}"
+        show-location
+></map>

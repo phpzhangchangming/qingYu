@@ -133,5 +133,11 @@ Page({
         }
 
         return f + m;
+    }, 
+    clickDetail:function(e){
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: `/pages/map/map?id=${id}&isFly=1`,
+        })
     }
 })
