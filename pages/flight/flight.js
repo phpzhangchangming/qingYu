@@ -137,7 +137,7 @@ Page({
     clickDetail:function(e){
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: `/pages/map/map?id=${id}&isFly=1`,
+            url: `/pages/map/map?id=${id}&isFly=1&title=飞行轨迹`,
         })
     }
 })

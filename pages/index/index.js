@@ -3,7 +3,7 @@ Page({
     data: {
         latitude: 0,
         longitude: 0,
-        scale: '10',
+        scale: '14',
         markers: [],
         mapHeight: App.globalData.height - App.globalData.navHeight - 46,
         navHeight: App.globalData.navHeight,

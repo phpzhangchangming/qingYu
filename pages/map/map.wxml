@@ -1,5 +1,5 @@
 <navbar
-        titleMsg="飞机位置"
+        titleMsg="{{title}}"
         bind:_callBack="addPilot"
         showNavigator="rollback"
 >

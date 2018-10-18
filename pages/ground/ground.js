@@ -130,7 +130,7 @@ Page({
     clickDetail:function(e){
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: `/pages/map/map?id=${id}`,
+            url: `/pages/map/map?id=${id}&title=地块列表`,
         })
     }
 })

@@ -10,7 +10,8 @@ Page({
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         showMap: false,
         polygons: [],
-        polyline:[]
+        polyline:[],
+        title:''
     },
     onLoad: function(options) {
         let userinfo = wx.getStorageSync('userInfo');
@@ -20,6 +21,9 @@ Page({
             })
             return;
         }
+        this.setData({
+            title:options.title
+        })
         wx.showLoading({
             title: '加载中...',
             mask: true
