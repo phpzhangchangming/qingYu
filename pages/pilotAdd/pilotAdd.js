@@ -2,15 +2,23 @@ const App = getApp();
 Page({
     data: {
         butText: '添 加',
+        title:'添加飞手',
         name: '',
         phone: '',
         id:0,
         type:'add'
     },
     onLoad: function (options) {
+        let userinfo = wx.getStorageSync('userInfo');
+        if (!userinfo) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
         if (options.type == 'change') {
             this.setData({
                 butText: '修 改',
+                title:'修改飞手',
                 name:options.name,
                 phone:options.phone,
                 id:options.id,
@@ -46,14 +54,10 @@ Page({
                     data: data,
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result != 1) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '操作失败，请联系管理员',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function (res) { }
-                            })
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        }else if(res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
                         } else {
                             wx.reLaunch({
                                 url: "/pages/pilot/pilotList"

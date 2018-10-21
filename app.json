@@ -1,58 +1,59 @@
 {
-  "pages": [
-    "pages/login/login",
-    "pages/index/index",
-    "pages/pilot/pilotList",
-    "pages/pilotAdd/pilotAdd",
-    "pages/user/user",
-    "pages/topUp/topUp",
-    "pages/expense/expense",
-    "pages/ground/ground",
-    "pages/ground/groundedit",
-    "pages/flight/flight",
-    "pages/map/map",
-    "components/navbar/navbar"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#36373C",
-    "navigationBarTitleText": "植保无人机",
-    "navigationBarTextStyle": "#fff",
-    "enablePullDownRefresh": false,
-    "navigationStyle": "custom"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "飞机",
-        "iconPath":"/images/feiji-off.png",
-        "selectedIconPath":"/images/feiji-on.png"
-      },
-      {
-        "pagePath": "pages/pilot/pilotList",
-        "text": "飞手",
-        "iconPath": "/images/feishou-off.png",
-        "selectedIconPath": "/images/feishou-on.png"
-      },
-      {
-        "pagePath": "pages/flight/flight",
-        "text": "飞行",
-        "iconPath": "/images/feixing-off.png",
-        "selectedIconPath": "/images/feixing-on.png"
-      },
-      {
-        "pagePath": "pages/ground/ground",
-        "text": "地块",
-        "iconPath": "/images/dikuai-off.png",
-        "selectedIconPath": "/images/dikuai-on.png"
-      },
-      {
-        "pagePath": "pages/user/user",
-        "text": "个人",
-        "iconPath": "/images/geren-off.png",
-        "selectedIconPath": "/images/geren-on.png"
-      }
-    ]
-  }
+    "pages": [
+        "pages/login/login",
+        "pages/index/index",
+        "pages/pilot/pilotList",
+        "pages/pilotAdd/pilotAdd",
+        "pages/user/user",
+        "pages/topUp/topUp",
+        "pages/expense/expense",
+        "pages/ground/ground",
+        "pages/ground/groundedit",
+        "pages/flight/flight",
+        "pages/map/map",
+        "components/navbar/navbar"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#36373C",
+        "navigationBarTitleText": "植保无人机",
+        "navigationBarTextStyle": "#fff",
+        "enablePullDownRefresh": false,
+        "navigationStyle": "custom"
+    },
+    "tabBar": {
+        "selectedColor": "#067DFE",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "飞机",
+                "iconPath": "/images/feiji-off.png",
+                "selectedIconPath": "/images/feiji-on.png"
+            },
+            {
+                "pagePath": "pages/pilot/pilotList",
+                "text": "飞手",
+                "iconPath": "/images/feishou-off.png",
+                "selectedIconPath": "/images/feishou-on.png"
+            },
+            {
+                "pagePath": "pages/flight/flight",
+                "text": "飞行",
+                "iconPath": "/images/feixing-off.png",
+                "selectedIconPath": "/images/feixing-on.png"
+            },
+            {
+                "pagePath": "pages/ground/ground",
+                "text": "地块",
+                "iconPath": "/images/dikuai-off.png",
+                "selectedIconPath": "/images/dikuai-on.png"
+            },
+            {
+                "pagePath": "pages/user/user",
+                "text": "个人",
+                "iconPath": "/images/geren-off.png",
+                "selectedIconPath": "/images/geren-on.png"
+            }
+        ]
+    }
 }

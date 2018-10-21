@@ -1,3 +1,4 @@
+const App = getApp();
 Page({
     data: {
         customerName: '',
@@ -7,6 +8,12 @@ Page({
         version:getApp().globalData.version
     },
     onLoad: function() {
+        let userinfo = wx.getStorageSync('userInfo');
+        if (!userinfo) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
     },
     onShow:function(){
         let that = this;
@@ -25,9 +32,15 @@ Page({
                         token: res.data.token
                     },
                     success: function (res) {
-                        that.setData({
-                            money: res.data.data
-                        })
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        }else{
+                            that.setData({
+                                money: res.data.data
+                            })
+                        }
                     }
                 })
             }

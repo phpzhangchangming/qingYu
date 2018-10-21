@@ -2,6 +2,7 @@
         titleMsg="飞机位置"
         bind:_callBack="addPilot"
         show='false'
+        refreshUrl="/pages/index/index"
 >
 </navbar>
 <map

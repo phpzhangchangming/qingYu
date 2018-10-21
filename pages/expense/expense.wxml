@@ -9,7 +9,7 @@
         <view wx:for="{{list}}" wx:key="{{index}}" class="item">
             <view data-index="{{index}}" class="inner txt">
                 <view class="float-l" data-index="{{index}}">{{item.typeDesc}}</view>
-                <view class="float-r" data-index="{{index}}">{{item.amount}}</view>
+                <view class="float-r" data-index="{{index}}">{{item.inOrOut==1?'+':'-'}}{{item.amount}}</view>
                 <view class='float-m' data-index="{{index}}">{{item.time}}</view>
             </view>
         </view>

@@ -1,4 +1,10 @@
-<navbar titleMsg="飞行列表" data-show="asdf" bind:_callBack="addPilot" show="false">
+<navbar 
+    titleMsg="飞行列表" 
+    data-show="asdf" 
+    bind:_callBack="addPilot" 
+    show="false"
+    refreshUrl="/pages/flight/flight"
+>
 </navbar>
 <scroll-view class='scroll' scroll-y='true'>
     <view class="item-box">

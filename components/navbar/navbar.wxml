@@ -1,6 +1,9 @@
 <view class='nav bg-white' style='height:{{navH}}px;'>
     <view class='nav-title'>
         {{titleMsg}}
+        <navigator wx:if="{{refreshUrl}}" url="{{refreshUrl}}" hover-class="navigator-hover" open-type='reLaunch'>
+            <image style="{{show != 'show'?'':'padding:10px 50px'}}" src='../../images/refresh.png' mode='aspectFit' class='back'></image>
+        </navigator>
         <view wx:if="{{show === 'show'}}">
             <navigator wx:if="{{showNavigator === 'add'}}" url="{{url}}" hover-class="navigator-hover">
                 <image src='../../images/add.png' mode='aspectFit' class='back'></image>

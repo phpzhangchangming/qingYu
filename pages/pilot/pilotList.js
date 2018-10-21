@@ -4,9 +4,15 @@ Page({
         delBtnWidth: 160,
         editBtnWidth: 180,
         hidden: true,
-        list: [],
+        list: []
     },
     onLoad: function (options) {
+        let userinfo = wx.getStorageSync('userInfo');
+        if (!userinfo) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
         wx.showLoading({
             title: '加载中...',
             mask: true
@@ -14,15 +20,14 @@ Page({
         this.initEleWidth();
         this.getData();
     },
+    addPilot: function () {
+    },
     touchS: function (e) {
         if (e.touches.length == 1) {
             this.setData({
                 startX: e.touches[0].clientX
             });
         }
-    },
-    addPilot: function () {
-        console.log('addPilot');
     },
     touchM: function (e) {
         if (e.touches.length == 1) {
@@ -53,13 +58,16 @@ Page({
             var disX = this.data.startX - endX;
             var btnWidth = this.data.delBtnWidth + this.data.editBtnWidth;
             var txtStyle = "left:0";
+            var index = e.target.dataset.index;
+            var list = this.data.list;
             if (disX > 70) {
                 txtStyle = "left:-" + btnWidth + "px"
+                for (let i in list) {
+                    list[i].txtStyle = "left:0px"
+                }
             } else {
                 this.setData({hidden: true});
             }
-            var index = e.target.dataset.index;
-            var list = this.data.list;
             list[index].txtStyle = txtStyle;
             this.setData({list: list});
         }
@@ -108,14 +116,12 @@ Page({
                     },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '删除失败',
-                                showCancel: false,
-                                confirmText: '确定',
-                            })
-                        } else {
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                            return;
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        }else{
                             wx.showToast({
                                 title: '已删除',
                                 icon: 'success',
@@ -140,7 +146,6 @@ Page({
     },
     getData: function () {
         var that = this;
-        var that = this;
         wx.getStorage({
             key: 'userInfo',
             success: function (res) {
@@ -155,14 +160,10 @@ Page({
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result != 1) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function (res) { }
-                            })
+                        if(res.statusCode == 506){
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
                         } else {
                             that.setData({ list: res.data.data });
                         }

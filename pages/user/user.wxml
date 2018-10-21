@@ -2,7 +2,7 @@
         titleMsg="个人中心"
         bind:_callBack="addPilot"
         show="false"
->
+ >
 </navbar>
 <view class="item-box">
     <view class="item">

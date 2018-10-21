@@ -1,5 +1,5 @@
 <navbar
-        titleMsg="添加飞手"
+        titleMsg="{{title}}"
         bind:_callBack="addPilot"
         showNavigator="rollback"
 >

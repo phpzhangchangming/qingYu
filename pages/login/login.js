@@ -9,6 +9,7 @@ Page({
         showTime:false
     },
     onLoad: function() {
+        wx.hideLoading();
         let that = this;
         wx.getSetting({
             success: function(res) {
@@ -32,6 +33,9 @@ Page({
                 }
             }
         })
+    },
+    clearPhone:function(){
+        this.setData({ phone: '' })
     },
     phoneData:function(e){
         this.setData({phone:e.detail.value})
@@ -93,7 +97,7 @@ Page({
             mask: true
         });
         wx.request({
-            url: getApp().globalData.url + 'user/login',
+            url: getApp().globalData.url + 'user/adminLogin',
             data: {
                 phone:phone,
                 verifyCode:verifyCode
@@ -106,7 +110,7 @@ Page({
                     wx.hideLoading();
                     wx.showModal({
                         title: '通知',
-                        content: '登录失败，请核实信息',
+                        content: res.data.errors,
                         showCancel: false,
                         confirmText: '确定',
                     })
@@ -122,16 +126,22 @@ Page({
                                 },
                                 success: resUrl => {
                                     wx.hideLoading();
-                                    wx.setStorageSync('userInfo',{
-                                        id: res.data.data.id,
-                                        token: res.data.data.token,
-                                        customerName: res.data.data.customerName,
-                                        phone: res.data.data.phone,
-                                        name: res.data.data.name,
-                                    })
-                                    wx.switchTab({
-                                        url: '/pages/index/index'
-                                    })
+                                    if (res.statusCode == 506) {
+                                        App.errShow(res.statusCode);
+                                    } else if (res.data.result != 1) {
+                                        App.errShow(res.statusCode, res.data.errors);
+                                    }else{
+                                        wx.setStorageSync('userInfo', {
+                                            id: res.data.data.id,
+                                            token: res.data.data.token,
+                                            customerName: res.data.data.customerName,
+                                            phone: res.data.data.phone,
+                                            name: res.data.data.name,
+                                        })
+                                        wx.switchTab({
+                                            url: '/pages/index/index'
+                                        })
+                                    }
                                 }
                             })
                         }

@@ -1,3 +1,4 @@
+const App = getApp();
 Page({
     data: {
         list: [],
@@ -5,7 +6,14 @@ Page({
         limit: 20,
         goOnLoad: true
     },
-    onLoad: function (options) {},
+    onLoad: function (options) {
+        let userinfo = wx.getStorageSync('userInfo');
+        if (!userinfo) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
+    },
     onShow: function () {
         this.getData();
     },
@@ -30,30 +38,27 @@ Page({
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function (res) { }
-                            })
-                            return;
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        } else {
+                            if (that.data.page >= res.data.data.pages) {
+                                that.setData({ goOnLoad: false })
+                            }
+                            let lists = res.data.data.list;
+                            let list = [];
+                            for (var index in lists) {
+                                list.push({
+                                    'id': lists[index].id,
+                                    'typeDesc': lists[index].typeDesc,
+                                    'amount': lists[index].amount,
+                                    'time': lists[index].createTime,
+                                    'inOrOut': lists[index].inOrOut
+                                });
+                            }
+                            that.setData({ list: list })
                         }
-                        if (that.data.page >= res.data.data.pages) {
-                            that.setData({ goOnLoad: false })
-                        }
-                        let lists = res.data.data.list;
-                        let list = [];
-                        for (var index in lists) {
-                            list.push({
-                                'id': lists[index].id,
-                                'typeDesc': lists[index].typeDesc,
-                                'amount': lists[index].amount,
-                                'time': lists[index].createTime
-                            });
-                        }
-                        that.setData({ list: list })
                     }
                 })
             }
@@ -84,30 +89,26 @@ Page({
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function (res) { }
-                            })
-                            return;
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        }else{
+                            if (that.data.page >= res.data.data.pages) {
+                                that.setData({ goOnLoad: false })
+                            }
+                            let lists = res.data.data.list;
+                            let list = that.data.list;
+                            for (var index in lists) {
+                                list.push({
+                                    'id': lists[index].id,
+                                    'typeDesc': lists[index].typeDesc,
+                                    'amount': lists[index].amount,
+                                    'time': lists[index].createTime
+                                });
+                            }
+                            that.setData({ list: list });
                         }
-                        if (that.data.page >= res.data.data.pages) {
-                            that.setData({ goOnLoad: false })
-                        }
-                        let lists = res.data.data.list;
-                        let list = that.data.list;
-                        for (var index in lists) {
-                            list.push({
-                                'id': lists[index].id,
-                                'typeDesc': lists[index].typeDesc,
-                                'amount': lists[index].amount,
-                                'time': lists[index].createTime
-                            });
-                        }
-                        that.setData({ list: list });
                     }
                 })
             }

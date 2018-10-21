@@ -1,3 +1,4 @@
+const App = getApp();
 Page({
     data: {
         list: [],
@@ -5,8 +6,13 @@ Page({
         limit:20,
         goOnLoad:true
     },
-    onLoad: function () {},
-    onShow: function () {
+    onLoad: function () {
+        let userinfo = wx.getStorageSync('userInfo');
+        if (!userinfo) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
         wx.showLoading({
             title: '加载中...'
         });
@@ -33,41 +39,37 @@ Page({
                     url: getApp().globalData.url + 'flyRecord/getFlyRecordList',
                     data: {
                         userId: userId,
-                        token:token,
+                        token: token,
                         page: that.data.page,
                         limit: that.data.limit
                     },
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function (res) { }
-                            })
-                            return;
-                        }
-                        if (that.data.page >= res.data.data.pages) {
-                            that.setData({ goOnLoad: false })
-                        }
-                        let moment_list = that.data.list;
-                        let lists = res.data.data.list;
-                        for (var index in lists) {
-                            moment_list.push({
-                                id: lists[index].id,
-                                name: lists[index].pilotName,
-                                num: lists[index].uavHardwareSn,
-                                fTime: that.timeChange(lists[index].flyDuration),
-                                sprayAreaMu: lists[index].sprayAreaMu,
-                                time: lists[index].flyStartTime,
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        } else {
+                            if (that.data.page >= res.data.data.pages) {
+                                that.setData({ goOnLoad: false })
+                            }
+                            let moment_list = that.data.list;
+                            let lists = res.data.data.list;
+                            for (var index in lists) {
+                                moment_list.push({
+                                    id: lists[index].id,
+                                    name: lists[index].pilotName,
+                                    num: lists[index].uavHardwareSn,
+                                    fTime: that.timeChange(lists[index].flyDuration),
+                                    sprayAreaMu: lists[index].sprayAreaMu,
+                                    time: lists[index].flyStartTime,
+                                });
+                            }
+                            that.setData({
+                                list: moment_list
                             });
                         }
-                        that.setData({
-                            list: moment_list
-                        });
                     }
                 })
             }
@@ -91,33 +93,29 @@ Page({
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function (res) { }
-                            })
-                            return;
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        } else {
+                            if (that.data.page >= res.data.data.pages) {
+                                that.setData({ goOnLoad: false })
+                            }
+                            let lists = res.data.data.list;
+                            let list = [];
+                            let time = 0;
+                            for (var index in lists) {
+                                list.push({
+                                    id: lists[index].id,
+                                    name: lists[index].pilotName,
+                                    num: lists[index].uavHardwareSn,
+                                    fTime: that.timeChange(lists[index].flyDuration),
+                                    sprayAreaMu: lists[index].sprayAreaMu,
+                                    time: lists[index].flyStartTime,
+                                });
+                            }
+                            that.setData({ list: list })
                         }
-                        if (that.data.page >= res.data.data.pages) {
-                            that.setData({ goOnLoad: false })
-                        }
-                        let lists = res.data.data.list;
-                        let list = [];
-                        let time = 0;
-                        for (var index in lists) {
-                            list.push({
-                                id: lists[index].id,
-                                name: lists[index].pilotName,
-                                num: lists[index].uavHardwareSn,
-                                fTime: that.timeChange(lists[index].flyDuration),
-                                sprayAreaMu: lists[index].sprayAreaMu,
-                                time: lists[index].flyStartTime,
-                            });
-                        }
-                        that.setData({ list: list })
                     }
                 });
             }

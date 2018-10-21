@@ -53,14 +53,10 @@ Page({
                     },
                     success: function(res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function(res) {}
-                            })
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
                         } else {
                             let data = res.data.data.boundary;
                             data = data.split(";");
@@ -112,64 +108,59 @@ Page({
                     },
                     success: function(res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function(res) {}
-                            })
-                            return;
-                        }
-                        let polygons = [];
-                        let points = [];
-                        let data = [];
-                        if (res.data.data.farmland){
-                            let data = res.data.data.farmland.boundary;
-                            data = data.split(";");
-                            let l = [];
-                            for (let k in data) {
-                                l = data[k].split("-");
-                                if (l[0]) {
-                                    for (let key in l) {
-                                        points.push({
-                                            latitude: l[key].split(',')[0],
-                                            longitude: l[key].split(',')[1]
-                                        });
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        }else{
+                            let polygons = [];
+                            let points = [];
+                            let data = [];
+                            if (res.data.data.farmland) {
+                                let data = res.data.data.farmland.boundary;
+                                data = data.split(";");
+                                let l = [];
+                                for (let k in data) {
+                                    l = data[k].split("-");
+                                    if (l[0]) {
+                                        for (let key in l) {
+                                            points.push({
+                                                latitude: l[key].split(',')[0],
+                                                longitude: l[key].split(',')[1]
+                                            });
+                                        }
                                     }
                                 }
+                                polygons.push({
+                                    points: points
+                                });
                             }
-                            polygons.push({
-                                points: points
+                            let polyline = [];
+                            points = [];
+                            data = res.data.data.dataList;
+                            let lat = '';
+                            let lng = '';
+                            for (let i in data) {
+                                if (lat == data[i].lat && lng == data[i].lng) {
+                                    continue;
+                                }
+                                lat = data[i].lat
+                                lng = data[i].lng
+                                points.push({ longitude: lng, latitude: lat })
+                            }
+                            polyline.push({
+                                points: points,
+                                color: "#FF0000DD",
+                                width: 2
+                            })
+                            that.setData({
+                                polygons: polygons,
+                                latitude: polyline[0]['points'][0]['latitude'],
+                                longitude: polyline[0]['points'][0]['longitude'],
+                                polyline: polyline,
+                                showMap: true
                             });
                         }
-                        let polyline = [];
-                        points = [];
-                        data = res.data.data.dataList;
-                        let lat = '';
-                        let lng = '';
-                        for(let i in data){
-                            if (lat == data[i].lat && lng == data[i].lng){
-                                continue;
-                            }
-                            lat = data[i].lat
-                            lng = data[i].lng
-                            points.push({ longitude: lng, latitude:lat})
-                        }
-                        polyline.push({
-                            points:points,
-                            color: "#FF0000DD",
-                            width: 2,
-                            dottedLine: true
-                        })
-                        that.setData({
-                            polygons: polygons,
-                            latitude: polyline[0]['points'][0]['latitude'],
-                            longitude: polyline[0]['points'][0]['longitude'],
-                            polyline: polyline,
-                            showMap: true
-                        });
                     }
                 });
             }

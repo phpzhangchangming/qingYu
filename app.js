@@ -11,6 +11,22 @@ App({
             }
         });
     },
+    errShow:function(n,str){
+        if( n == 506 ){
+            wx.removeStorageSync('userInfo');
+            wx.reLaunch({
+                url: '/pages/login/login',
+            })
+        }else{
+            wx.showModal({
+                title: '通知',
+                content: str,
+                showCancel: false,
+                confirmText: '确定',
+                success: function (res) { }
+            })
+        }
+    },
     globalData: {
         userInfo: [],
         height: 0,

@@ -24,7 +24,8 @@
         <form bindsubmit="phoneLogin">
             <view class='phone'>
                 <text>手机号</text>
-                <input name="phone" maxlength="11" placeholder="手机号" bindinput="phoneData" type="number" auto-focus/>
+                <view class='clear' bindtap='clearPhone'>X</view>
+                <input name="phone" maxlength="11" placeholder="手机号" bindinput="phoneData" type="number" auto-focus value='{{phone}}'/>
             </view>
             <view class='verify'>
                 <text>验证码</text>

@@ -1,15 +1,22 @@
+const App = getApp();
 Page({
     data: {
         id: 0,
         name: '',
-        area: '',
+        areaMu: '',
         crop: ''
     },
     onLoad: function (options) {
+        let userinfo = wx.getStorageSync('userInfo');
+        if (!userinfo) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
         this.setData({
             id: options.id,
             name: options.name,
-            area: options.area,
+            areaMu: options.areaMu,
             crop: options.crop
         });
     },
@@ -46,17 +53,14 @@ Page({
                         plantingStructure: plantingStructure
                     },
                     success: function (res) {
-                        wx.hideLoading();
-                        if(res.data.result == 1){
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        }else{
+                            wx.hideLoading();
                             wx.reLaunch({
                                 url: '/pages/ground/ground'
-                            })
-                        }else{
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定'
                             })
                         }
                     }

@@ -1,3 +1,4 @@
+const App = getApp();
 Page({
     data: {
         editBtnWidth: 180,
@@ -6,6 +7,12 @@ Page({
         list: []
     },
     onLoad: function (options) {
+        let userinfo = wx.getStorageSync('userInfo');
+        if (!userinfo) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
         wx.showLoading({
             title: '加载中...',
         });
@@ -29,26 +36,23 @@ Page({
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定'
-                            })
-                            return;
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
+                        }else{
+                            let lists = res.data.data.list;
+                            let list = [];
+                            for (var index in lists) {
+                                list.push({
+                                    'id': lists[index].id,
+                                    'name': lists[index].name,
+                                    'crop': lists[index].plantingStructure,
+                                    'areaMu': lists[index].areaMu
+                                });
+                            }
+                            that.setData({ list: list })
                         }
-                        let lists = res.data.data.list;
-                        let list = [];
-                        for (var index in lists) {
-                            list.push({
-                                'id': lists[index].id,
-                                'name': lists[index].name,
-                                'crop': lists[index].plantingStructure,
-                                'area': lists[index].area
-                            });
-                        }
-                        that.setData({ list: list })
                     }
                 });
             }
@@ -89,13 +93,16 @@ Page({
             var disX = this.data.startX - endX;
             var btnWidth = this.data.editBtnWidth;
             var txtStyle = "left:0";
+            var index = e.target.dataset.index;
+            var list = this.data.list;
             if(disX > 70){
                 txtStyle = "left:-"+btnWidth+"px"
+                for (let i in list) {
+                    list[i].txtStyle = "left:0px"
+                }
             }else{
                 this.setData({ hidden:true });
             }
-            var index = e.target.dataset.index;
-            var list = this.data.list;
             list[index].txtStyle = txtStyle;
             this.setData({ list:list });
         }
@@ -121,10 +128,10 @@ Page({
         let index = e.currentTarget.dataset.index;
         let id = this.data.list[index].id;
         let name = this.data.list[index].name;
-        let area = this.data.list[index].area;
+        let areaMu = this.data.list[index].areaMu;
         let crop = this.data.list[index].crop;
         wx.navigateTo({
-            url: `/pages/ground/groundedit?id=${id}&name=${name}&area=${area}&crop=${crop}`,
+            url: `/pages/ground/groundedit?id=${id}&name=${name}&areaMu=${areaMu}&crop=${crop}`,
         });
     },
     clickDetail:function(e){

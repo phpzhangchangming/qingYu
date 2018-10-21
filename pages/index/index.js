@@ -11,8 +11,12 @@ Page({
         showMap:false
     },
     onLoad: function () {
-    },
-    onShow: function () {
+        let userinfo = wx.getStorageSync('userInfo');
+        if (!userinfo) {
+            wx.reLaunch({
+                url: '/pages/login/login'
+            })
+        }
         wx.showLoading({
             title: '加载中...',
             mask: true
@@ -41,14 +45,10 @@ Page({
                     header: { 'content-type': 'application/json' },
                     success: function (res) {
                         wx.hideLoading();
-                        if (res.data.result == 0) {
-                            wx.showModal({
-                                title: '通知',
-                                content: '正在维护中，请稍后',
-                                showCancel: false,
-                                confirmText: '确定',
-                                success: function (res) { }
-                            })
+                        if (res.statusCode == 506) {
+                            App.errShow(res.statusCode);
+                        } else if (res.data.result != 1) {
+                            App.errShow(res.statusCode, res.data.errors);
                         } else {
                             let lists = [];
                             for (var index in res.data.data) {

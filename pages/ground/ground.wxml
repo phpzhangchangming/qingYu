@@ -2,6 +2,7 @@
         titleMsg="地块列表"
         bind:_callBack="addPilot"
         show="false"
+        refreshUrl="/pages/ground/ground"
 >
 </navbar>
 <view class="item-box">
@@ -19,10 +20,10 @@
             >
                 <view class="float-l" data-index="{{index}}">{{item.name}}</view>
                 <view class="float-r" data-index="{{index}}">{{item.crop}}</view>
-                <view class='float-m' data-index="{{index}}">{{item.area}} 亩</view>
+                <view class='float-m' data-index="{{index}}">{{item.areaMu}} 亩</view>
             </view>
             <view data-index="{{index}}">
-                <view bindtap="editItem" data-index="{{index}}" class="inner edit">进行修改</view>
+                <view bindtap="editItem" data-index="{{index}}" class="inner edit">修改</view>
             </view>
         </view>
     </view>

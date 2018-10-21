@@ -16,6 +16,10 @@ Component({
         show: {
             type: String,
             value: 'show'
+        },
+        refreshUrl:{
+            type:String,
+            value:''
         }
     },
     data: {

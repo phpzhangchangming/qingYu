@@ -15,7 +15,7 @@
     </view>
     <view class="item">
         <view class="name">地块面积</view>
-        <input class="input" placeholder="地块面积" disabled="true" value="{{area}}" />
+        <input class="input" placeholder="地块面积" disabled="true" value="{{areaMu}}亩" />
     </view>
     <view class="but">
         <button

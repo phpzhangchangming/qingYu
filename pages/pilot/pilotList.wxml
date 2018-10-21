@@ -3,6 +3,7 @@
         bind:_callBack="addPilot"
         showNavigator="add"
         url="/pages/pilotAdd/pilotAdd"
+        refreshUrl="/pages/pilot/pilotList"
 >
 </navbar>
 <view class="item-box">
@@ -21,7 +22,7 @@
             </view>
             <view data-index="{{index}}">
                 <navigator url="/pages/pilotAdd/pilotAdd?id={{item.id}}&type=change&name={{item.name}}&&phone={{item.phone}}" hover-class="navigator-hover">
-                    <view data-index="{{index}}" data-id="{{item.id}}" class="inner edit">进行修改</view>
+                    <view data-index="{{index}}" data-id="{{item.id}}" class="inner edit">修改</view>
                 </navigator>
                 <view catchtap="delItemVerify" data-index="{{index}}" class="inner del">删除</view>
                 <view catchtap="delItemConfirm" hidden="{{hidden}}" data-index="{{index}}" data-point-id="{{item.id}}" class="inner delConfirm">确认删除</view>
